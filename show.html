@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <title>course form</title>
+    <link rel="stylesheet" href="std.css">
+</head>
+<body>
+    <div class="contener">
+        <div class="sidebar">
+            <h3>students</h3>
+            <a href="stdform.html">register std</a>
+            <a href="course.html">course</a>
+            <a href="show.html">show both</a>
+        </div>
+        <div class="formstd">
+            <div class="innerform">
+            <form action="#">
+                <select name="" id="selectstdform" class="select">
+                    <option value="" selected >select student name</option>
+                </select><br><br>
+                
+                <select name="" id="selectcourseform" class="select">
+                    <option value="" selected >select course</option>
+                </select><br><br>
+                <input type="button" class="btn" value="save">
+            </form>
+            <br><br>
+            <thead class="thead">
+                <table>
+                    <tr>
+                        <th>Course ID</th>
+                        <th>Course name</th>
+                        <th>Actions</th>
+                    </tr>
+                    
+                    <tbody class="stdcourse"></tbody>
+                </table>
+            </thead>
+            </div>
+        </div>
+    </div>
+    <script>
+        let selectstdform = document.querySelector('#selectstdform'),
+         selectcourseform=document.querySelector('#selectcourseform'),
+         btn = document.querySelector('.btn');
+        function selects(){
+            let show;
+            if(localStorage.getItem('stdforms')==null){
+                show=[]
+
+            }
+            else{
+                show=JSON.parse(localStorage.getItem('stdforms' || '[]'))
+                for(let i=0;i<show.length;i++){
+                    row =`<option value="${show[i].name}"> ${show[i].name} </option>`;
+                    selectstdform.innerHTML+=row;
+                    
+                }
+            }
+            if(localStorage.getItem('courseform')==null){
+                show=[]
+            }
+            else{
+                show=JSON.parse(localStorage.getItem('courseform' || '[]'))
+                for(let i=0;i<show.length;i++){
+                    row =`<option value="${show[i].coursename}"> ${show[i].coursename} </option>`;
+                    selectcourseform.innerHTML+=row;
+                }
+            }
+        }
+        class stdcourse{
+            constructor(selectstdform,selectcourseform){
+                this.selectstdform= selectstdform;
+                this.selectcourseform=selectcourseform;
+            }
+        }
+        class UI{
+            getitem(Stdcourse){
+               let row = `<tr> <td> ${Stdcourse.selectstdform}  </td> <td> ${Stdcourse.selectcourseform} </td> <td>
+                    <span><i class="fa-solid fa-trash-can"></i></span></td> </tr>`;
+                document.querySelector('.stdcourse').innerHTML+=row;
+            }
+        }
+        class localstore{
+            addlocal(Stdcourse){
+                let adding;
+                if(localStorage.getItem('stdcourses')==null){
+                    adding=[];
+                    adding.push(Stdcourse);
+                    localStorage.setItem('stdcourses',JSON.stringify(adding));
+                }
+                else{
+                    adding = JSON.parse(localStorage.getItem('stdcourses'))
+                        adding.push(Stdcourse);
+                        localStorage.setItem('stdcourses',JSON.stringify(adding))
+                    
+                }
+
+            }
+            loadlocal(){
+                let load;
+                if(localStorage.getItem('stdcourses')==null){
+                    load=[];
+                }
+                else{
+                    load=JSON.parse(localStorage.getItem('stdcourses' || '[]'));
+                    for(let i=0; i<load.length;i++){
+                        ui.getitem(load[i]);
+                    }
+                }
+            }
+        }
+        let local =new localstore;
+        document.addEventListener('DOMContentLoaded',function(){
+            local.loadlocal();
+            selects();
+        });
+            let ui =new UI;
+        btn.addEventListener('click',function(){
+            if(selectstdform.value=="" || selectcourseform.value==""){
+                alert('select the names')
+            }
+            else{
+                let Stdcourse = new stdcourse(selectstdform.value,selectcourseform.value);
+                ui.getitem(Stdcourse);
+                local.addlocal(Stdcourse);
+            }
+
+        })
+
+
+
+    </script>
+</body>
+</html>

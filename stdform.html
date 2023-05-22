@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <title>form students</title>
+    <link rel="stylesheet" href="std.css">
+</head>
+<body>
+    <div class="contener">
+        <div class="sidebar">
+            <h3>students</h3>
+            <a href="stdform.html">register std</a>
+            <a href="course.html">course</a>
+            <a href="show.html">show both</a>
+        </div>
+        <div class="formstd">
+            <div class="innerform">
+            <form action="#">
+                <img src="image/logo.jpg" alt=""><br>
+                <h2>Student registeration</h2><br>
+                <input type="text" class="name" id="input" placeholder="enter your name"><br><br>
+                <input type="number" class="age" id="input" placeholder="enter your age"><br><br>
+                <input type="number" class="number" id="input" placeholder="enter your number"><br><br>
+                <input type="text" class="village" id="input" placeholder="enter your village"><br><br>
+                <input type="button" class="btn" value="save">
+            </form>
+            <br><br>
+                <table>
+                    <div class="headertable">
+                        <input type="text" placeholder="search" class="search">
+                        <span class="clearall">clear all</span>
+                    </div>
+                    <tr>
+                        <th>student name</th>
+                        <th>student age</th>
+                        <th>sturdent number</th>
+                        <th>student village</th>
+                        <th>Actions</th>
+                    </tr>
+                    <tbody class="stdform"></tbody>
+                    
+                </table>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <script src="form.js"></script>
+</body>
+</html>
